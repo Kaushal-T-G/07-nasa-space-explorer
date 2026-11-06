@@ -142,3 +142,228 @@ button:hover {
   font-size: 48px;
   margin-bottom: 20px;
 }
+
+/* Make gallery cards look clickable */
+.gallery-item {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.gallery-item h3 {
+  margin-top: 10px;
+  padding: 0 5px;
+}
+
+/* Dark background behind the modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+/* The white box, matching the gallery cards */
+.modal-content {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 20px;
+  position: relative;
+}
+
+.modal-content img,
+.modal-content iframe {
+  width: 100%;
+  border-radius: 4px;
+  display: block;
+}
+
+.modal-content iframe {
+  aspect-ratio: 16 / 9;
+}
+
+/* X button: overrides the general button styles */
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  width: auto;
+  padding: 0 6px;
+  background: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 28px;
+  line-height: 1;
+  color: #212121;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background-color: #d3d3d3;
+}
+
+#modalTitle {
+  font-family: Verdana, sans-serif;
+  color: #212121;
+  margin: 16px 0 4px;
+}
+
+.modal-date {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+#modalExplanation {
+  line-height: 1.6;
+  color: #333;
+}
+
+/* ===== NASA branding ===== */
+body {
+  font-family: 'Public Sans', Arial, sans-serif;
+  color: #212121;
+}
+
+.site-header {
+  border-bottom: 3px solid #0b3d91;
+}
+
+h1,
+.gallery-item h3,
+#modalTitle {
+  font-family: 'Inter', Arial, sans-serif;
+  color: #061f4a;
+}
+
+/* Get Space Images button: NASA red */
+.filters button {
+  background-color: #dd361c;
+  border-color: #dd361c;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.filters button:hover {
+  background-color: #c62d1f;
+}
+
+/* Blue accent on cards and modal */
+.gallery-item,
+.modal-content {
+  border-top: 4px solid #105bd8;
+}
+
+/* Dates in NASA's mono font */
+.date,
+.modal-date {
+  font-family: 'DM Mono', monospace;
+  color: #5b616b;
+}
+
+/* Modal background in NASA dark blue */
+.modal {
+  background: rgba(6, 31, 74, 0.85);
+}
+
+/* ===== Hover zoom on gallery images ===== */
+.img-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  height: 200px;
+}
+
+.img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover .img-wrap img {
+  transform: scale(1.1);
+}
+
+/* ===== Video entries ===== */
+.video-placeholder {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  background: #061f4a;
+}
+
+.play-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #dd361c;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.video-link {
+  display: inline-block;
+  margin: 8px 5px 0;
+  color: #105bd8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.video-link:hover {
+  text-decoration: underline;
+}
+
+.video-button {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 16px;
+  background: #dd361c;
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.video-button:hover {
+  background: #c62d1f;
+}
+
+/* ===== Did You Know? fact ===== */
+.space-fact {
+  background: #ffffff;
+  border-left: 5px solid #105bd8;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px 20px;
+  margin: 0 20px 10px;
+  line-height: 1.5;
+}
+
+.space-fact strong {
+  font-family: 'Inter', Arial, sans-serif;
+  color: #061f4a;
+}
