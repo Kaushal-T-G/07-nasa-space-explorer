@@ -60,6 +60,13 @@ async function getSpaceimages() {
       ? '<p class="cached-notice">📦 Showing saved results. You\'re offline.</p>'
       : '';
 
+    // NASA's API sometimes returns its site logo instead of the real photo
+    // (a known issue on NASA's side since APOD moved to science.nasa.gov)
+    const isPlaceholder = (item) => (item.url || '').includes('nasa-logo');
+    if (data.length && data.every(isPlaceholder)) {
+      gallery.innerHTML += '<p class="cached-notice">⚠️ NASA\'s API is currently returning placeholder logos instead of the real photos. This is a problem on NASA\'s side, so try again later.</p>';
+    }
+
     data.forEach((item, index) => {
       let media;
 
