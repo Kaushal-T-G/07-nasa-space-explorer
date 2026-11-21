@@ -8,10 +8,13 @@ const endInput = document.getElementById('endDate');
 // - Restrict dates to NASA's image archive (starting from 1995)
 setupDateInputs(startInput, endInput);
 
-const imgButton = document.querySelector('button');
+const imgButton = document.getElementById('getImagesButton');
 const gallery = document.getElementById('gallery');
 
-const API_KEY = 'Jqbck9NPtCTqFWJbGkdbGhCFCPpQG7LMHNQM6wcW';
+// Paste your own key from https://api.nasa.gov between the quotes.
+// If left empty, DEMO_KEY is used (works, but heavily rate-limited).
+const MY_API_KEY = 'Jqbck9NPtCTqFWJbGkdbGhCFCPpQG7LMHNQM6wcW';
+const API_KEY = MY_API_KEY || 'DEMO_KEY';
 
 let currentImages = [];
 
@@ -28,8 +31,23 @@ async function getSpaceimages() {
   try {
     const response = await fetch(url);
 
+    // Set by the service worker when it had to fall back to cached data
+    const cacheStatus = response.headers.get('X-From-SW-Cache');
+
+    if (cacheStatus === 'miss') {
+      gallery.innerHTML = '<p class="error">📡 You\'re offline and this date range hasn\'t been saved yet. Try a range you\'ve viewed before.</p>';
+      return;
+    }
+
     if (!response.ok) {
-      throw new Error(`NASA API error: ${response.status}`);
+      // Surface NASA's own error message (e.g. bad key, rate limit, invalid date)
+      let detail = `HTTP ${response.status}`;
+      try {
+        const body = await response.json();
+        detail = body.error?.message || body.msg || detail;
+      } catch { /* not JSON */ }
+      gallery.innerHTML = `<p class="error">NASA API error: ${detail}</p>`;
+      return;
     }
 
     const data = await response.json();
@@ -38,7 +56,9 @@ async function getSpaceimages() {
     currentImages = data;
     console.log(data);
 
-    gallery.innerHTML = '';
+    gallery.innerHTML = cacheStatus === 'true'
+      ? '<p class="cached-notice">📦 Showing saved results. You\'re offline.</p>'
+      : '';
 
     data.forEach((item, index) => {
       let media;
@@ -70,6 +90,11 @@ async function getSpaceimages() {
         </div>
       `;
     });
+
+    // Let the user know if they switched tabs while images were loading
+    if (document.hidden && typeof showAppNotification === 'function') {
+      showAppNotification('Your space images are ready 🌌', `${data.length} images from ${startDate} to ${endDate}`);
+    }
   } catch (error) {
     console.error(error);
     gallery.innerHTML = '<p class="error">Couldn\'t load images. Try again in a minute.</p>';

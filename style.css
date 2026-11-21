@@ -1,3 +1,8 @@
+/* Make the hidden attribute always win over display rules */
+[hidden] {
+  display: none !important;
+}
+
 /* Global reset & box sizing */
 * {
   box-sizing: border-box;
@@ -366,4 +371,119 @@ h1,
 .space-fact strong {
   font-family: 'Inter', Arial, sans-serif;
   color: #061f4a;
+}
+
+/* ===== PWA: offline indicator ===== */
+.offline-banner {
+  position: sticky;
+  top: 0;
+  z-index: 1100;
+  margin: -20px -20px 20px;
+  padding: 10px 16px;
+  background: #212121;
+  color: #ffffff;
+  text-align: center;
+  font-weight: 600;
+}
+
+body.is-offline .filters button {
+  opacity: 0.85;
+}
+
+.cached-notice {
+  flex-basis: 100%;
+  text-align: center;
+  padding: 10px;
+  background: #fff4e5;
+  border: 1px solid #ffcc80;
+  border-radius: 4px;
+  color: #6d4c00;
+}
+
+/* ===== PWA: custom install prompt ===== */
+.install-banner {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  z-index: 1100;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  width: calc(100% - 32px);
+  max-width: 520px;
+  padding: 14px 16px;
+  background: #0b3d91;
+  color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.install-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+}
+
+.install-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 200px;
+  line-height: 1.4;
+}
+
+.install-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.install-banner button {
+  width: auto;
+  border: none;
+  font-weight: 600;
+}
+
+.install-btn {
+  background: #fc3d21;
+  color: #ffffff;
+}
+
+.install-btn:hover {
+  background: #dd361c;
+}
+
+.install-dismiss {
+  background: transparent;
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.install-dismiss:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ===== PWA: notification button ===== */
+.app-actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  padding: 0 20px;
+}
+
+.notify-btn {
+  width: auto;
+  background: #ffffff;
+  color: #0b3d91;
+  border: 1px solid #0b3d91;
+  font-weight: 600;
+}
+
+.notify-btn:hover:not(:disabled) {
+  background: #e8eef9;
+}
+
+.notify-btn:disabled {
+  cursor: default;
+  opacity: 0.7;
 }
