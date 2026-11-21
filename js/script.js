@@ -13,7 +13,7 @@ const gallery = document.getElementById('gallery');
 
 // Paste your own key from https://api.nasa.gov between the quotes.
 // If left empty, DEMO_KEY is used (works, but heavily rate-limited).
-const MY_API_KEY = 'Jqbck9NPtCTqFWJbGkdbGhCFCPpQG7LMHNQM6wcW';
+const MY_API_KEY = 'HNDt7pttKLbQgLgrkqkzkjkKh7bK7tp9tcwQ8FFq';
 const API_KEY = MY_API_KEY || 'DEMO_KEY';
 
 let currentImages = [];
